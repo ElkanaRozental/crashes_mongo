@@ -1,4 +1,4 @@
-from repository.day_repository import find_sum_crashes_by_area_and_date
+from repository.date_repository import find_sum_crashes_by_area_and_date
 
 
 def test_find_sum_crashes_by_area_and_date():

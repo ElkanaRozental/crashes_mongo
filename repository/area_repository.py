@@ -1,4 +1,4 @@
-from database.connect import areas, daily
+from database.connect import areas
 
 
 def group_cause_by_area(area):
@@ -43,4 +43,3 @@ def get_statistics(area):
     ]
     return areas.aggregate(pipeline).to_list()
 
-print(get_statistics('1650'))

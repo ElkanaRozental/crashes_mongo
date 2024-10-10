@@ -121,4 +121,3 @@ def init_accidents_db():
         )
 
 
-init_accidents_db()
