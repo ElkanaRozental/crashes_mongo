@@ -51,7 +51,7 @@ def init_accidents_db():
 
         daily.update_one(
             {'date': convert_to_date(row['CRASH_DATE']),
-             'beat_of_occurrence': row['BEAT_OF_OCCURRENCE']},
+             'area': row['BEAT_OF_OCCURRENCE']},
             {
              '$inc': {'sum_accident': 1}
              },
@@ -70,7 +70,7 @@ def init_accidents_db():
 
         weekly.update_one(
            { 'start_week': start_week, 'end_week': end_week,
-             'beat_of_occurrence': row['BEAT_OF_OCCURRENCE'] },
+             'area': row['BEAT_OF_OCCURRENCE'] },
            {
              '$inc': {'sum_accident': 1}
              },
@@ -89,7 +89,7 @@ def init_accidents_db():
 
         monthly.update_one(
            { 'month': convert_to_month, 'year': convert_to_year,
-             'beat_of_occurrence': row['BEAT_OF_OCCURRENCE'], },
+             'area': row['BEAT_OF_OCCURRENCE'], },
            {
              '$inc': { 'sum_accident': 1 }
            },
