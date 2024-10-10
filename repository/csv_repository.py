@@ -1,6 +1,6 @@
 import csv
 import os
-from database.connect import daily, weekly, monthly, areas, reasons, accidents
+from database.connect import daily, weekly, monthly, areas, accidents
 from utils.data_utils import convert_to_date,get_week_range,get_month_range,convert_to_int
 
 
@@ -43,12 +43,6 @@ def init_accidents_db():
 
         accidents.insert_one(accident)
 
-        # day = {
-        #     # 'date': start_week,
-        #     # 'beat_of_occurrence': row['BEAT_OF_OCCURRENCE'],
-        #     'crash_id': row['CRASH_RECORD_ID'],
-        # }
-
         daily.update_one(
             {'date': convert_to_date(row['CRASH_DATE']),
              'area': row['BEAT_OF_OCCURRENCE']},
@@ -60,13 +54,6 @@ def init_accidents_db():
 
         start_week = get_week_range(converted_to_date)[0]
         end_week = get_week_range(converted_to_date)[1]
-
-        # week = {
-        #    # 'start_week': start_week,
-        #    # 'end_week': end_week,
-        #    # 'beat_of_occurrence': row['BEAT_OF_OCCURRENCE'],
-        #    'crash_id': row['CRASH_RECORD_ID'],
-        # }
 
         weekly.update_one(
            { 'start_week': start_week, 'end_week': end_week,
@@ -80,13 +67,6 @@ def init_accidents_db():
         convert_to_month = get_month_range(converted_to_date)[0]
         convert_to_year = get_month_range(converted_to_date)[1]
 
-        # month = {
-        #    # 'month': start_week,
-        #    # 'year': end_week,
-        #    # 'beat_of_occurrence': row['BEAT_OF_OCCURRENCE'],
-        #    'crash_id': row['CRASH_RECORD_ID'],
-        # }
-
         monthly.update_one(
            { 'month': convert_to_month, 'year': convert_to_year,
              'area': row['BEAT_OF_OCCURRENCE'], },
@@ -96,11 +76,6 @@ def init_accidents_db():
 
            upsert=True
         )
-
-        # accident_area = {
-        #     'beat_of_occurrence': row['BEAT_OF_OCCURRENCE'],
-        #     'prim_contributory_cause': row['PRIM_CONTRIBUTORY_CAUSE'],
-        # }
 
         areas.update_one(
             {
